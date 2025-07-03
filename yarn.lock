@@ -737,6 +737,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-core@npm:5.81.5":
+  version: 5.81.5
+  resolution: "@tanstack/query-core@npm:5.81.5"
+  checksum: 10c0/8d3af841f0e2f3fba1dfd100a8bbc2d07e7b1d5b8570d3d0d8bba5127601c2788e5f7c84839f93f3b0cbe54f14866c1fef8e3f9e745f02d27afaaeea33b7b755
+  languageName: node
+  linkType: hard
+
 "@tanstack/react-form@npm:^1.12.4":
   version: 1.12.4
   resolution: "@tanstack/react-form@npm:1.12.4"
@@ -755,6 +762,17 @@ __metadata:
     vinxi:
       optional: true
   checksum: 10c0/9197e8227d3b43abbf1e760d3f443c5abedaa31319b171644e4e9bd99f93774eb4c48deb902f6664b23613c1efb5541e8f7da2dc5b342fb9216c2c0b24e2db6e
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:^5.81.5":
+  version: 5.81.5
+  resolution: "@tanstack/react-query@npm:5.81.5"
+  dependencies:
+    "@tanstack/query-core": "npm:5.81.5"
+  peerDependencies:
+    react: ^18 || ^19
+  checksum: 10c0/04803dd7d7d6ac73ba8c55bb25d76aa2f74d173d1574a113c35559bf6a8ac7d04a75db5e470e9a2e4132fee5e0ce1ab23bd8c27d17f70a461aca0e7ae740e76b
   languageName: node
   linkType: hard
 
@@ -1407,15 +1425,6 @@ __metadata:
   version: 3.0.0
   resolution: "chownr@npm:3.0.0"
   checksum: 10c0/43925b87700f7e3893296c8e9c56cc58f926411cce3a6e5898136daaf08f08b9a8eb76d37d3267e707d0dcc17aed2e2ebdf5848c0c3ce95cf910a919935c1b10
-  languageName: node
-  linkType: hard
-
-"class-variance-authority@npm:^0.7.1":
-  version: 0.7.1
-  resolution: "class-variance-authority@npm:0.7.1"
-  dependencies:
-    clsx: "npm:^2.1.1"
-  checksum: 10c0/0f438cea22131808b99272de0fa933c2532d5659773bfec0c583de7b3f038378996d3350683426b8e9c74a6286699382106d71fbec52f0dd5fbb191792cccb5b
   languageName: node
   linkType: hard
 
@@ -3199,6 +3208,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"openai@npm:^5.8.2":
+  version: 5.8.2
+  resolution: "openai@npm:5.8.2"
+  peerDependencies:
+    ws: ^8.18.0
+    zod: ^3.23.8
+  peerDependenciesMeta:
+    ws:
+      optional: true
+    zod:
+      optional: true
+  bin:
+    openai: bin/cli
+  checksum: 10c0/71587ab2b8eb7b3222290bae0ae6f0914209303fb6505c7d1c3464c6a296847d17978238b619775617e8535cbac3e3565bf76e06b70d3bc8decd58143dfc589e
+  languageName: node
+  linkType: hard
+
 "optionator@npm:^0.9.3":
   version: 0.9.4
   resolution: "optionator@npm:0.9.4"
@@ -4174,14 +4200,15 @@ __metadata:
     "@eslint/eslintrc": "npm:^3"
     "@tailwindcss/postcss": "npm:^4.1.11"
     "@tanstack/react-form": "npm:^1.12.4"
+    "@tanstack/react-query": "npm:^5.81.5"
     "@types/node": "npm:^20"
     "@types/react": "npm:^19"
     "@types/react-dom": "npm:^19"
-    class-variance-authority: "npm:^0.7.1"
     clsx: "npm:^2.1.1"
     eslint: "npm:^9"
     eslint-config-next: "npm:15.3.4"
     next: "npm:15.3.4"
+    openai: "npm:^5.8.2"
     postcss: "npm:^8.5.6"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"

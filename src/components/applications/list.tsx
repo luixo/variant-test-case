@@ -3,7 +3,7 @@
 import React from "react";
 import {
   Application as ApplicationType,
-  applyTemplate,
+  DEFAULT_RESPONSE,
   useApplications,
 } from "@/utils/applications";
 import Link from "next/link";
@@ -12,7 +12,8 @@ import { ActionButton } from "@/components/ui/action-button";
 const Application: React.FC<{ application: ApplicationType }> = ({
   application,
 }) => {
-  const text = applyTemplate(application.values);
+  const lastResponse =
+    application.responses[application.responses.length - 1] || DEFAULT_RESPONSE;
   const [, setApplications] = useApplications();
   const removeApplication = React.useCallback(() => {
     setApplications((applications) =>
@@ -20,12 +21,12 @@ const Application: React.FC<{ application: ApplicationType }> = ({
     );
   }, [application.id, setApplications]);
   return (
-    <div className="bg-secondary-bg p-6 flex flex-col gap-2 rounded-xl">
+    <div className="bg-secondary-bg p-6 flex flex-col gap-2 rounded-xl justify-between">
       <Link
-        className="relative max-h-36 overflow-hidden"
+        className="relative max-h-36 overflow-hidden h-full"
         href={`/application/${application.id}`}
       >
-        <span className="whitespace-pre-wrap">{text}</span>
+        <span className="whitespace-pre-wrap">{lastResponse}</span>
         <div className="absolute bottom-0 w-full h-10 bg-linear-to-t to-secondary-bg/0 from-secondary-bg/100" />
       </Link>
       <div className="flex justify-between gap-4">
@@ -38,7 +39,7 @@ const Application: React.FC<{ application: ApplicationType }> = ({
         <ActionButton
           icon={{ src: "/copy.svg", alt: "Copy application to clipboard" }}
           reverse
-          onClick={() => navigator.clipboard.writeText(text.trim())}
+          onClick={() => navigator.clipboard.writeText(lastResponse.trim())}
         >
           Copy to clipboard
         </ActionButton>

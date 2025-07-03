@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import React from "react";
 import { Header } from "@/components/header";
+import { Providers } from "@/components/providers";
 
 const fixelDisplayFont = localFont({
   src: [
@@ -48,8 +49,10 @@ const Layout: React.FC<React.PropsWithChildren> = ({ children }) => (
     <body
       className={`${fixelDisplayFont.variable} ${fixelTextFont.variable} max-w-6xl gap-8 flex flex-col p-4 sm:p-8 m-auto font-sans overflow-x-hidden`}
     >
-      <Header />
-      {children}
+      <Providers>
+        <Header />
+        {children}
+      </Providers>
     </body>
   </html>
 );

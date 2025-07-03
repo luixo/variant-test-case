@@ -7,8 +7,10 @@ import { Goal } from "@/components/goal";
 import {
   Application,
   getNewApplication,
+  getResponse,
   useApplications,
 } from "@/utils/applications";
+import { useMutation } from "@tanstack/react-query";
 
 const findApplication = (applications: Application[], lookupId: string) => {
   const applicationIndex = applications.findIndex(({ id }) => lookupId === id);
@@ -43,6 +45,20 @@ const Page: React.FC<{ params: Promise<{ id: string }> }> = ({ params }) => {
     },
     [id, setApplications]
   );
+  const [currentIndex, setCurrentIndex] = React.useState(
+    (application?.responses.length ?? 1) - 1
+  );
+  const generateMutation = useMutation<string, Error, Application["values"]>({
+    mutationFn: (variables) => getResponse(variables),
+    onSuccess: (response) => {
+      setApplication((application) => ({
+        ...application,
+        responses: [...application.responses, response],
+      }));
+      setSubmitSuccessful(true);
+      setCurrentIndex((prevIndex) => prevIndex + 1);
+    },
+  });
   return (
     <>
       <div className="flex flex-col sm:flex-row gap-8">
@@ -50,9 +66,15 @@ const Page: React.FC<{ params: Promise<{ id: string }> }> = ({ params }) => {
           application={application}
           setApplication={setApplication}
           className="flex-1"
-          onSuccessfulSubmit={() => setSubmitSuccessful(true)}
+          generateMutation={generateMutation}
         />
-        <ApplicationResult application={application} className="flex-1" />
+        <ApplicationResult
+          currentIndex={currentIndex}
+          setCurrentIndex={setCurrentIndex}
+          application={application}
+          isLoading={generateMutation.status === "pending"}
+          className="flex-1"
+        />
       </div>
       {isSubmitSuccessful ? <Goal /> : null}
     </>

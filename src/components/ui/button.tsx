@@ -4,6 +4,7 @@ import { cn } from "@/utils/utils";
 const variants = {
   default:
     "bg-button-background text-white disabled:bg-border disabled:text-disabled-text",
+  white: "bg-white text-ternary-text border",
 };
 const sizes = {
   md: "h-11 px-4 py-2",

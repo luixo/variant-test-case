@@ -8,6 +8,8 @@ import { Application } from "@/utils/applications";
 import { createFormHook, createFormHookContexts } from "@tanstack/react-form";
 import React from "react";
 import * as z from "zod/v4-mini";
+import Image from "next/image";
+import { UseMutationResult } from "@tanstack/react-query";
 
 const { fieldContext, formContext } = createFormHookContexts();
 
@@ -23,7 +25,7 @@ const { useAppForm } = createFormHook({
 
 const DEFAULT_TITLE = "New application";
 const MAX_TEXTAREA_LENGTH = 1200;
-const validationForm = z.object({
+export const validationForm = z.object({
   companyName: z.string().check(z.minLength(1)),
   title: z.string().check(z.minLength(1)),
   skills: z.string().check(z.minLength(1)),
@@ -36,21 +38,26 @@ export const ApplicationForm: React.FC<
   React.ComponentProps<"form"> & {
     application: Application | undefined;
     setApplication: React.Dispatch<React.SetStateAction<Application>>;
-    onSuccessfulSubmit: () => void;
+    generateMutation: UseMutationResult<
+      string,
+      Error,
+      Application["values"],
+      unknown
+    >;
   }
 > = ({
   className,
   application,
   setApplication,
-  onSuccessfulSubmit,
+  generateMutation,
   ...props
 }) => {
   const form = useAppForm({
     defaultValues: {
-      companyName: application?.values.Company ?? "",
-      title: application?.values.JobTitle ?? "",
-      skills: application?.values.SkillsList ?? "",
-      additionalDetails: application?.values.AdditionalDetails ?? "",
+      companyName: application?.values.companyName ?? "",
+      title: application?.values.title ?? "",
+      skills: application?.values.skills ?? "",
+      additionalDetails: application?.values.additionalDetails ?? "",
     },
     validators: {
       onMount: validationForm,
@@ -60,19 +67,14 @@ export const ApplicationForm: React.FC<
     onSubmit: ({ value }) => {
       setApplication((application) => ({
         ...application,
-        values: {
-          Company: value.companyName,
-          JobTitle: value.title,
-          SkillsList: value.skills,
-          AdditionalDetails: value.additionalDetails,
-        },
+        values: value,
       }));
-      onSuccessfulSubmit();
+      generateMutation.mutate(value);
     },
   });
   const title =
-    application && application.values.JobTitle && application.values.Company
-      ? `${application.values.Company}, ${application.values.JobTitle}`
+    application && application.values.title && application.values.companyName
+      ? `${application.values.companyName}, ${application.values.title}`
       : DEFAULT_TITLE;
   return (
     <form
@@ -155,8 +157,40 @@ export const ApplicationForm: React.FC<
       </form.AppField>
       <form.Subscribe selector={(state) => state.canSubmit}>
         {(canSubmit) => (
-          <Button size="lg" type="submit" disabled={!canSubmit}>
-            Generate Now
+          <Button
+            size="lg"
+            type="submit"
+            variant={
+              generateMutation.status === "success" ? "white" : undefined
+            }
+            disabled={!canSubmit}
+            className={cn(
+              "whitespace-normal",
+              generateMutation.status === "error" ? "bg-destructive" : undefined
+            )}
+          >
+            {generateMutation.status === "pending" ? (
+              <Image
+                src="/loading.svg"
+                alt="Loading.."
+                width={24}
+                height={24}
+              />
+            ) : generateMutation.status === "success" ? (
+              <div className="flex gap-3">
+                <Image
+                  src="/reload.svg"
+                  alt="Regenerate"
+                  width={24}
+                  height={24}
+                />
+                Try again
+              </div>
+            ) : generateMutation.status === "error" ? (
+              `${String(generateMutation.error)}, try again?`
+            ) : (
+              "Generate Now"
+            )}
           </Button>
         )}
       </form.Subscribe>

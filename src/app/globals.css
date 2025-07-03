@@ -19,6 +19,24 @@
   --color-border-secondary: #eaecf0;
   --color-highlight: #edfcf2;
   --color-secondary-bg: #f2f4f7;
+  --color-ternary-text: #344054;
+}
+
+@theme {
+  --animate-bounce: bounce 2s ease-in-out infinite;
+  @keyframes bounce {
+    0%,
+    100% {
+      opacity: 1;
+      transform: translateY(5%);
+      animation-timing-function: linear();
+    }
+    50% {
+      opacity: 0.5;
+      transform: none;
+      animation-timing-function: linear();
+    }
+  }
 }
 
 @layer base {
