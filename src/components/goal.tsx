@@ -14,9 +14,9 @@ export const Goal = () => {
     return null;
   }
   return (
-    <div className="bg-highlight flex flex-col items-center justify-center p-14 gap-8">
+    <div className="bg-highlight flex flex-col items-center justify-center p-6 sm:p-14 gap-8 rounded-xl">
       <div className="flex flex-col gap-4 items-center max-w-md">
-        <div className="text-selected-text text-4xl font-semibold font-display">
+        <div className="text-selected-text text-3xl sm:text-4xl font-semibold font-display">
           Hit your goal
         </div>
         <div className="text-primary-text text-center">

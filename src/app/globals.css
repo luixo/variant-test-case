@@ -42,7 +42,6 @@
   }
 
   body {
-    @apply max-w-6xl gap-8 flex flex-col p-8 m-auto font-sans overflow-x-hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

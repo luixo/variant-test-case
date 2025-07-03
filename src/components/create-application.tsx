@@ -7,8 +7,8 @@ import { getNewApplication, useApplications } from "@/utils/applications";
 import { useRouter } from "next/navigation";
 
 export const CreateApplication: React.FC<
-  React.ComponentProps<typeof Button>
-> = (props) => {
+  React.ComponentProps<typeof Button> & { shrinkable?: boolean }
+> = ({ shrinkable, ...props }) => {
   const router = useRouter();
   const [, setApplications] = useApplications();
   const [nextApplicationId] = React.useState(() =>
@@ -25,7 +25,9 @@ export const CreateApplication: React.FC<
   return (
     <Button onClick={addApplication} {...props}>
       <Image src="/plus.svg" alt="Add" width={24} height={24} />
-      Create new
+      <span className={shrinkable ? "hidden sm:inline" : undefined}>
+        Create new
+      </span>
     </Button>
   );
 };

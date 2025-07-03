@@ -28,7 +28,7 @@ const Application: React.FC<{ application: ApplicationType }> = ({
         <span className="whitespace-pre-wrap">{text}</span>
         <div className="absolute bottom-0 w-full h-10 bg-linear-to-t to-secondary-bg/0 from-secondary-bg/100" />
       </Link>
-      <div className="flex justify-between">
+      <div className="flex justify-between gap-4">
         <ActionButton
           icon={{ src: "/trash.svg", alt: "Delete application" }}
           onClick={removeApplication}
@@ -50,7 +50,7 @@ const Application: React.FC<{ application: ApplicationType }> = ({
 export const ApplicationsList = () => {
   const [applications] = useApplications();
   return (
-    <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-6">
+    <div className="mt-6 grid sm:grid-cols-2 gap-x-4 gap-y-6">
       {applications.map((application) => (
         <Application key={application.id} application={application} />
       ))}

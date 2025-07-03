@@ -4,7 +4,7 @@ import { HeaderApplications } from "@/components/header/applications";
 import Link from "next/link";
 
 export const Header = () => (
-  <div className="flex gap-6 justify-between items-center">
+  <div className="flex flex-col sm:flex-row gap-6 justify-between sm:items-center">
     <Link className="flex gap-3 items-center" href="/">
       <Image
         src="/logo.svg"
@@ -15,7 +15,7 @@ export const Header = () => (
       />
       <span className="text-3xl font-display">Alt+Shift</span>
     </Link>
-    <div className="flex gap-6">
+    <div className="hidden sm:flex gap-6">
       <HeaderApplications />
       <Link
         href="/"

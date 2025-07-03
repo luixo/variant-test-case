@@ -21,7 +21,7 @@ export const ApplicationResult: React.FC<
   return (
     <div
       className={cn(
-        "rounded-xl bg-secondary-bg p-6 flex flex-col gap-4 justify-between text-primary-text",
+        "rounded-xl bg-secondary-bg p-6 flex flex-col gap-4 justify-between text-primary-text min-h-72",
         className
       )}
       {...props}

@@ -45,7 +45,9 @@ export const metadata: Metadata = {
 
 const Layout: React.FC<React.PropsWithChildren> = ({ children }) => (
   <html lang="en">
-    <body className={`${fixelDisplayFont.variable} ${fixelTextFont.variable}`}>
+    <body
+      className={`${fixelDisplayFont.variable} ${fixelTextFont.variable} max-w-6xl gap-8 flex flex-col p-4 sm:p-8 m-auto font-sans overflow-x-hidden`}
+    >
       <Header />
       {children}
     </body>

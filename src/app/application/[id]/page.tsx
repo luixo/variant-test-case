@@ -45,7 +45,7 @@ const Page: React.FC<{ params: Promise<{ id: string }> }> = ({ params }) => {
   );
   return (
     <>
-      <div className="flex gap-8">
+      <div className="flex flex-col sm:flex-row gap-8">
         <ApplicationForm
           application={application}
           setApplication={setApplication}
