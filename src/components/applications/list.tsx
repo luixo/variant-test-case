@@ -21,7 +21,7 @@ const Application: React.FC<{ application: ApplicationType }> = ({
     );
   }, [application.id, setApplications]);
   return (
-    <div className="bg-secondary-bg p-6 flex flex-col gap-2 rounded-xl justify-between">
+    <div className="bg-secondary-bg p-6 flex flex-col gap-2 rounded-xl justify-between min-h-64">
       <Link
         className="relative max-h-36 overflow-hidden h-full"
         href={`/application/${application.id}`}
